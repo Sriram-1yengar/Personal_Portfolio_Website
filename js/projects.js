@@ -33,6 +33,7 @@ class ProjectShowcase {
                 techStack: ["Python", "Streamlit", "Pandas", "Plotly", "PostgreSQL"],
                 image: "images/projects/ecommerce-dashboard.jpg",
                 demoLink: "https://demo-link.com",
+                hasDemo: true,
                 githubLink: "https://github.com/username/ecommerce-dashboard",
                 caseStudyLink: "assets/case-studies/ecommerce-dashboard.pdf",
                 features: [
@@ -57,6 +58,7 @@ class ProjectShowcase {
                 techStack: ["Python", "Google Collab", "LLM", "Fine-tuning", "NLP", "Google Gemini API"],
                 image: "images/projects/web-scraping-tool.jpg",
                 demoLink: "https://demo-link.com",
+                hasDemo: true,
                 githubLink: "https://github.com/username/web-scraping-tool",
                 caseStudyLink: "assets/case-studies/web-scraping-tool.pdf",
                 features: [
@@ -75,12 +77,37 @@ class ProjectShowcase {
             },
             {
                 id: 3,
+                title: "Music Recommendation Engine",
+                description: "Built real-time analytics platform for marketing campaigns using Apache Kafka and Elasticsearch. Provides instant insights on campaign performance and ROI tracking.",
+                category: "analytics",
+                techStack: ["Python", "Apache Kafka", "Elasticsearch", "Kibana", "FastAPI"],
+                image: "images/projects/marketing-analytics.jpg",
+                hasDemo: false,
+                githubLink: "https://drive.google.com/file/d/1U6L9YGLoLPq09LftSbdHIU07Y4t4a_Z4/view?usp=sharing",
+                caseStudyLink: "https://drive.google.com/file/d/1U6L9YGLoLPq09LftSbdHIU07Y4t4a_Z4/view?usp=sharing",
+                features: [
+                    "Real-time campaign tracking",
+                    "ROI calculation and optimization",
+                    "Multi-channel attribution",
+                    "Custom dashboard creation",
+                    "Alert system for anomalies"
+                ],
+                challenges: [
+                    "High-volume data processing",
+                    "Low-latency requirements",
+                    "Complex attribution modeling",
+                    "Scalable architecture design"
+                ]
+            },
+            {
+                id: 4,
                 title: "Computer Vision based Land Classification",
                 description: "In this academic project, I applied big data techniques to a real-world environmental problem. Using Python and PySpark, I processed and analyzed satellite imagery from Radiant-MLHub (Landsat 8, Sentinel 1 & 2). I then deployed and evaluated multiple supervised machine learning models to perform multi-class land classification with an accuracy of 73.2%, gaining hands-on experience with large-scale data handling and modeling.",
                 category: "ml",
                 techStack: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Matplotlib"],
                 image: "images/projects/churn-prediction.jpg",
                 demoLink: "https://demo-link.com",
+                hasDemo: true,
                 githubLink: "https://github.com/username/churn-prediction",
                 caseStudyLink: "assets/case-studies/churn-prediction.pdf",
                 features: [
@@ -96,31 +123,7 @@ class ProjectShowcase {
                     "Model interpretability requirements",
                     "Production deployment considerations"
                 ]
-            },
-            {
-                id: 4,
-                title: "Real-time Marketing Analytics",
-                description: "Built real-time analytics platform for marketing campaigns using Apache Kafka and Elasticsearch. Provides instant insights on campaign performance and ROI tracking.",
-                category: "analytics",
-                techStack: ["Python", "Apache Kafka", "Elasticsearch", "Kibana", "FastAPI"],
-                image: "images/projects/marketing-analytics.jpg",
-                demoLink: "https://demo-link.com",
-                githubLink: "https://github.com/username/marketing-analytics",
-                caseStudyLink: "assets/case-studies/marketing-analytics.pdf",
-                features: [
-                    "Real-time campaign tracking",
-                    "ROI calculation and optimization",
-                    "Multi-channel attribution",
-                    "Custom dashboard creation",
-                    "Alert system for anomalies"
-                ],
-                challenges: [
-                    "High-volume data processing",
-                    "Low-latency requirements",
-                    "Complex attribution modeling",
-                    "Scalable architecture design"
-                ]
-            },
+            }/**,
             {
                 id: 5,
                 title: "Social Media Sentiment Analyzer",
@@ -168,7 +171,7 @@ class ProjectShowcase {
                     "Data normalization across sources",
                     "Scalable monitoring system"
                 ]
-            }
+            }*/
         ];
     }
     
@@ -252,29 +255,15 @@ class ProjectShowcase {
                     ${project.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
                 </div>
                 <div class="project-links">
-                    <a href="${project.demoLink}" class="project-link" target="_blank" rel="noopener">
-                        Live Demo
-                    </a>
+                    ${project.hasDemo ? `<a href="${project.demoLink}" class="project-link" target="_blank" rel="noopener">Live Demo</a>` : ''}
                     <a href="${project.githubLink}" class="project-link" target="_blank" rel="noopener">
                         GitHub
                     </a>
-                    <button class="project-link view-details-btn" data-project-id="${project.id}">
-                        View Details
-                    </button>
                 </div>
             </div>
         `;
         
-        // Add click event for modal
-        const viewDetailsBtn = card.querySelector('.view-details-btn');
-        viewDetailsBtn.addEventListener('click', () => this.openModal(project));
-        
-        // Add click event for entire card
-        card.addEventListener('click', (e) => {
-            if (!e.target.matches('a, button')) {
-                this.openModal(project);
-            }
-        });
+        // No modal functionality needed since View Details button is removed
         
         return card;
     }
@@ -340,8 +329,8 @@ class ProjectShowcase {
         }
         
         if (modalDemoLink) {
-            modalDemoLink.href = project.demoLink;
-            modalDemoLink.style.display = project.demoLink ? 'inline-flex' : 'none';
+            modalDemoLink.href = project.demoLink || '#';
+            modalDemoLink.style.display = project.hasDemo && project.demoLink ? 'inline-flex' : 'none';
         }
         
         if (modalGithubLink) {
