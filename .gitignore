@@ -17,6 +17,7 @@ pnpm-debug.log*
 
 # local planning notes, not part of the site
 design_brief_suggestion.md
+status.md
 
 # macOS / editors
 .DS_Store
