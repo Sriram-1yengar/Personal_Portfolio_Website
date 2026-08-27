@@ -1,0 +1,74 @@
+---
+import { site } from '../site';
+---
+
+<div class="contact" data-reveal>
+  <div class="contact__lead">
+    <h2>Let’s talk.</h2>
+    <p>
+      I’m open to data science and ML roles at teams that ship. The fastest
+      way to reach me is email — I read everything.
+    </p>
+    <a class="btn" href={`mailto:${site.email}`}>
+      {site.email}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <ul class="contact__links">
+    {site.socials
+      .filter((s) => !s.href.startsWith('mailto:'))
+      .map((s) => (
+        <li>
+          <a class="arrow-link" href={s.href} target="_blank" rel="noopener">
+            {s.label}
+            <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </li>
+      ))}
+    <li>
+      <a class="arrow-link" href={site.resumeUrl} target="_blank" rel="noopener">
+        Résumé (PDF)
+        <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .contact__lead h2 {
+    font-size: var(--text-3xl);
+  }
+  .contact__lead p {
+    color: var(--text-muted);
+    max-width: 42ch;
+    margin-block: var(--space-sm) var(--space-lg);
+    font-size: var(--text-lg);
+  }
+  .contact__links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-top: 0.5rem;
+    font-size: var(--text-lg);
+  }
+  @media (max-width: 780px) {
+    .contact {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+  }
+</style>

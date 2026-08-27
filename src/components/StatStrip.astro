@@ -1,0 +1,83 @@
+---
+const stats = [
+  { value: '40%', label: 'Faster core data pipeline at Certilytics (5 days → 3)' },
+  { value: '320 → 18', label: 'SDoH features compressed with no accuracy loss' },
+  { value: '$M+', label: 'Contract savings surfaced for large health plans' },
+  { value: '45%', label: 'Less manual research after automating GTM pricing data' },
+];
+---
+
+<section class="strip">
+  <div class="container container--wide row">
+    {stats.map((s) => (
+      <div class="stat" data-reveal>
+        <span class="value">{s.value}</span>
+        <span class="label">{s.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .strip {
+    border-block: 1px solid var(--border);
+    background: var(--bg-subtle);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    padding: var(--space-lg) var(--space-md);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+  .stat:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .value {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+  .label {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-snug);
+  }
+  @media (max-width: 780px) {
+    .row {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stat {
+      padding: var(--space-md);
+    }
+    .stat:nth-child(odd) {
+      border-left: 0;
+      padding-left: 0;
+    }
+    .stat:nth-child(1),
+    .stat:nth-child(2) {
+      border-bottom: 1px solid var(--border);
+    }
+  }
+  @media (max-width: 440px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+    .stat {
+      border-left: 0 !important;
+      padding-left: 0 !important;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

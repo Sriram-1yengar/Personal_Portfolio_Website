@@ -1,0 +1,111 @@
+---
+import { site } from '../site';
+---
+
+<section class="hero" id="top">
+  <div class="container container--wide grid">
+    <div class="lead" data-reveal>
+      <p class="eyebrow">{site.role} · Pennsylvania</p>
+      <h1>
+        I build machine learning systems<br />
+        that move real numbers.
+      </h1>
+      <p class="sub">
+        Two years turning messy data into things a business actually
+        watches — deep-learning models for healthcare cost, feature
+        pipelines, and GTM analytics. Currently doing go-to-market data
+        science at Mason.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#work">
+          View work
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="btn btn--ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <aside class="facts" data-reveal>
+      <dl>
+        <div>
+          <dt class="mono">Now</dt>
+          <dd>GTM Data Science Intern, <span>Mason</span></dd>
+        </div>
+        <div>
+          <dt class="mono">Focus</dt>
+          <dd>LLM fine-tuning · MLOps · data pipelines</dd>
+        </div>
+        <div>
+          <dt class="mono">Toolbelt</dt>
+          <dd>Python · Spark/Scala · SQL · PyTorch · AWS</dd>
+        </div>
+        <div>
+          <dt class="mono">Education</dt>
+          <dd>B.S. Data Science, Penn State</dd>
+        </div>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .lead h1 {
+    font-size: var(--text-display);
+    margin-block: var(--space-md) var(--space-md);
+  }
+  .sub {
+    max-width: 48ch;
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .facts {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: var(--space-md);
+    margin-top: 0.6rem;
+  }
+  .facts dl {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  .facts dt {
+    margin-bottom: 0.25rem;
+  }
+  .facts dd {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+  .facts dd span {
+    color: var(--accent);
+  }
+
+  @media (max-width: 880px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    .facts {
+      order: -1;
+    }
+  }
+</style>

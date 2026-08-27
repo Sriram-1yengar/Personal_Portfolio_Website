@@ -1,0 +1,119 @@
+---
+import { experience } from '../data/experience';
+---
+
+<ol class="xp">
+  {experience.map((role) => (
+    <li class="xp__item" data-reveal>
+      <div class="xp__when mono">
+        {role.start} <span aria-hidden="true">—</span> {role.end}
+      </div>
+      <div class="xp__main">
+        <h3 class="xp__title">
+          {role.title}
+          <span class="xp__co">{role.company}</span>
+          {role.current && <span class="xp__badge">Current</span>}
+        </h3>
+        <p class="xp__blurb">{role.blurb}</p>
+        {role.points.length > 0 && (
+          <ul class="xp__points">
+            {role.points.map((p) => (
+              <li>{p}</li>
+            ))}
+          </ul>
+        )}
+        <div class="xp__tags">
+          {role.tags.map((t) => (
+            <span class="xp__tag">{t}</span>
+          ))}
+        </div>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .xp {
+    list-style: none;
+  }
+  .xp__item {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: var(--space-lg);
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--border);
+  }
+  .xp__item:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .xp__when {
+    padding-top: 0.35rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .xp__title {
+    font-size: var(--text-xl);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .xp__co {
+    color: var(--accent);
+  }
+  .xp__badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+    align-self: center;
+  }
+  .xp__blurb {
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+    max-width: 60ch;
+  }
+  .xp__points {
+    margin-top: var(--space-sm);
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .xp__points li {
+    color: var(--text);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+  .xp__points li::marker {
+    color: var(--text-faint);
+  }
+  .xp__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: var(--space-sm);
+  }
+  .xp__tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.15rem 0.45rem;
+  }
+  @media (max-width: 720px) {
+    .xp__item {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+    .xp__when {
+      padding-top: 0;
+    }
+  }
+</style>

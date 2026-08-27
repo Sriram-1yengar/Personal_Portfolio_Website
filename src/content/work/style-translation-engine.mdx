@@ -1,0 +1,50 @@
+---
+title: Bidirectional Style Translation Engine
+summary: A fine-tuned lightweight LLM that translates English between modern, Gen-Z, and Shakespearean registers in both directions — built around a hand-engineered, API-augmented dataset and a training loop that fits in Colab.
+year: 2024
+role: Solo — dataset, augmentation pipeline, fine-tuning
+timeframe: '2024'
+status: shipped
+featured: true
+order: 2
+tags: ['NLP', 'LLM', 'Fine-tuning', 'Data Engineering']
+stack: ['Python', 'Hugging Face Transformers', 'Google Gemini API', 'Google Colab']
+links: []
+metrics:
+  - { value: '10k+', label: 'Parallel style examples' }
+  - { value: '3', label: 'Registers, bidirectional' }
+  - { value: 'Colab', label: 'Resource-constrained training' }
+---
+
+## Context
+
+Style transfer is a good stress test for a small language model: the meaning has to
+survive while the surface form changes completely, and there is no large public
+parallel corpus for "modern ↔ Shakespearean ↔ Gen-Z."
+
+## Problem
+
+Get usable bidirectional style translation out of a lightweight open-source model
+that can be fine-tuned and served without a GPU budget.
+
+## Approach
+
+- **Dataset.** Hand-built a seed set of parallel sentences across the three
+  registers, structured so every pair could be used in both directions.
+- **Augmentation.** Wrote a pipeline that calls the Google Gemini API to paraphrase
+  and expand the seed set, then filtered generations for meaning drift and register
+  leakage — growing the corpus past 10,000 examples while keeping quality controlled.
+- **Training.** Built a compact fine-tuning workflow (Hugging Face Transformers)
+  that runs inside Google Colab: gradient accumulation and mixed precision to stay
+  within memory, checkpointing to survive session limits.
+- **Evaluation.** Held-out pairs scored for semantic similarity plus manual review
+  of register accuracy in both directions.
+
+## Results
+
+The fine-tuned model produces fluent translations in all three registers and both
+directions from a single checkpoint. The bigger takeaway was the data workflow:
+a small, carefully-seeded set plus disciplined LLM augmentation was enough to teach
+a genuinely niche task on a laptop-tier budget.
+
+{/* TODO(sriram): add repo link + a few example input/output pairs; note final model + params. */}
