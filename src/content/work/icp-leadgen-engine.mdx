@@ -1,0 +1,66 @@
+---
+title: ICP Lead Gen Engine
+summary: A multi-stage, evidence-first lead generation pipeline that takes any seller's profile and target ICP as input, and only surfaces leads it can prove with a grounded, verifiable source.
+year: 2026
+role: Solo — architecture, pipeline, prompt engineering
+timeframe: '2026'
+status: shipped
+featured: true
+order: 1
+tags: ['GenAI', 'Agentic AI', 'GTM', 'LLM Pipelines']
+stack: ['Python', 'Claude (Sonnet + Haiku)', 'Claude Code', 'Apollo API', 'Tavily API']
+links: []
+metrics: []
+---
+
+## Context
+
+Most lead-gen tools either need heavy manual setup per company or are hardcoded to one business's ICP. The core design bet here was different: instead of ranking leads by an LLM's opinion of fit, treat every claim about a lead as something that has to survive being fact-checked before it's shown — closer to how a skeptical analyst would actually vet a lead list, not how a generic scraper would.
+
+## Problem
+
+Build a pipeline that takes any seller's profile and target ICP as input, discovers candidate companies, and ranks them primarily by *verifiable evidence* of buying signal — not by a fit score alone, which is easy to hallucinate confidently.
+
+## Approach
+
+- **Seller-agnostic design.** Every prompt substitutes a `__SELLER__` token with the seller's own free-text operating model, generated in a dedicated profile-building stage. No industry, product, or GTM motion is hardcoded into any prompt — the same pipeline runs for a fintech seller or a voice-AI seller without code changes.
+- **Two-layer scoring.** A fit-scoring stage has the LLM score each candidate across 5 qualitative axes (industry fit, product fit, market maturity, competitive displacement signal, compliance friction), with the composite computed in plain code, not LLM judgment. A separate evidence-detection stage runs an agentic web-search loop per company to find real, sourced buying signals — job postings, funding events, public complaints about incumbent tools.
+- **Evidence beats fit score.** Final ranking is deterministic: any company with a verified, grounded signal outranks one with none, regardless of fit score. Fit score is only the tiebreaker. This was a deliberate choice to keep the ranking explainable and resistant to confident-sounding but unverified claims.
+- **Grounding enforced in code, not just prompted.** Every source a model cites is checked against URLs the pipeline actually retrieved during that pass — a cited source that wasn't actually fetched is dropped at the code level, regardless of how the model tagged it.
+- **Forced structured output.** Every stage uses tool-call forcing rather than "output JSON" prompting, with schema constraints (numeric bounds, enums, array size limits) doing validation work a text prompt can't guarantee.
+- **Heavy anti-pattern prompting over few-shot.** Rather than example-based prompting, the system prompts lean on explicit negative instruction — "hallucinated companies are worse than fewer companies," "an empty list is a valid, honest output" — paired with an adversarial framing for the verification stage ("treat every claim as if it will be checked immediately").
+- **Tested against adversarial cases, not just happy paths.** The test suite includes live checks that deliberately try to trick the pipeline — a fabricated claim citing a real page that doesn't actually support it, a claim citing a dead URL — and asserts the pipeline drops them.
+
+## Architecture
+
+```
+Seller profile + target ICP
+        │
+        ▼
+Seller Profile Builder ──► operating model (substituted into every prompt below)
+        │
+        ▼
+Discovery (agentic web search) ──► candidate companies
+        │
+        ▼
+Rank & Gate ──► LLM scores 5 fit axes, code computes composite, hard filters applied
+        │
+        ▼
+Signal Detection ──► per-company agentic search for real buying signals
+        │
+        ▼
+Verification ──► each cited source re-fetched and checked: reachable, on-topic, recent, right company
+        │
+        ▼
+Contact Identification ──► Apollo lookup, LLM never invents a name
+        │
+        ▼
+Synthesis ──► evidence-first re-rank, final write-up per lead, no claims beyond input evidence
+        │
+        ▼
+Ranked leads, each with sourced evidence
+```
+
+## Results
+
+Verified with a mix of deterministic offline tests (does the code actually drop an ungrounded citation?) and live adversarial tests against real search and real pages — including one that plants a fabricated claim on a real, well-known company's Wikipedia page and confirms the pipeline rejects it while accepting the true claim from the same source. The seller/ICP inputs are fully parameterized; one hardcoded assumption remains in the contact-lookup fallback (a customer-support-title bias), noted as a known limitation rather than smoothed over.

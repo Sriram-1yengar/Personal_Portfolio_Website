@@ -1,0 +1,34 @@
+---
+title: LiftVision
+summary: Computer vision pipeline that analyzes lifting biomechanics from video and automatically flags technique inconsistencies.
+year: 2026
+role: Solo — CV pipeline, feature engineering, service
+timeframe: 2026 — ongoing
+status: in-progress
+featured: true
+order: 4
+tags: ['Computer Vision', 'Biomechanics']
+stack: ['Python', 'MediaPipe']
+links: []
+metrics:
+  - { value: '4', label: 'Barbell movements analyzed' }
+---
+
+## Context
+
+Lifting technique is hard to self-assess from the inside — small form breakdowns (bar path drift, joint angle collapse) are often invisible to the lifter in the moment but show up clearly on video. LiftVision started as a way to turn raw lifting footage into structured, actionable feedback.
+
+## Problem
+
+Build a system that can take lifting video, extract the biomechanical signal that actually matters, and flag technique issues - based on your personal body proportions - automatically rather than requiring a coach to review footage manually.
+
+## Approach
+
+- **Pose extraction.** Used MediaPipe pose landmarking to track the lifter's body across each rep.
+- **Feature engineering.** Extracted joint angles, bar velocity progression, and bar path across 4 barbell movements.
+- **Rule-based flagging.** Compared extracted form features against a guiding rule set to automatically flag technique inconsistencies.
+- **Delivery.** Deployed the pipeline as a versioned Python service, including body proportion analysis to account for lifter-specific biomechanics.
+
+## Results
+
+A working technique-analysis service that turns raw lifting video into structured joint-angle and bar-path data with automated flagging — the foundation for a broader lifting content and coaching channel currently in progress.

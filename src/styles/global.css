@@ -46,6 +46,39 @@ body {
   background: var(--selection);
 }
 
+/* ============================================================
+   Ambient background — faint blueprint dot-grid + accent glow.
+   Fixed, non-interactive, sits behind all content. Opacity stays
+   low enough that it never competes with text.
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, var(--grid-dot) 1px, transparent 1.5px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, #000 0%, transparent 72%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: -20vh;
+  right: -14vw;
+  width: 48vw;
+  height: 48vw;
+  min-width: 340px;
+  z-index: -2;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: var(--glow-opacity);
+  filter: blur(24px);
+}
+
 img,
 picture,
 svg,

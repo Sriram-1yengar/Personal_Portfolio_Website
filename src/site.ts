@@ -1,12 +1,13 @@
 export const site = {
   name: 'Sriram Iyengar',
   role: 'Data Scientist',
+  location: 'Bangalore, India',
   url: 'https://sriramiyengar.me',
   description:
     'Sriram Iyengar — data scientist building machine learning models and data pipelines for healthcare, e-commerce, and go-to-market teams.',
   email: 'sriramkiyengar@gmail.com',
   resumeUrl:
-    'https://drive.google.com/file/d/1q9F5QOjcQQi4NmBsiv6bc7ji-hClBkiJ/view?usp=sharing',
+    '/Sriram_Iyengar_Resume_Website.pdf',
   socials: [
     { label: 'GitHub', href: 'https://github.com/Sriram-1yengar' },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/sriramiyengar2001/' },

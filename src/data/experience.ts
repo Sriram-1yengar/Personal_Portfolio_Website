@@ -10,35 +10,59 @@ export interface Role {
 }
 
 export const experience: Role[] = [
-  {
-    company: 'Mason',
-    title: 'Data Science Intern — Go-To-Market',
-    start: 'Aug 2025',
+    {
+    company: 'F&D Partners',
+    title: 'Independent AI Consultant',
+    start: 'June 2026',
     end: 'Present',
     current: true,
-    blurb:
-      'Automated data pipelines and analytics for market intelligence, pricing trends, and competitive benchmarking across the e-commerce ecosystem.',
+    blurb: 'Freelance automation and analytics consulting for a deregulated energy advisory firm.',
     points: [
-      'Built lead-generation pipelines with cross-functional partners, increasing qualified outreach by 30% and accelerating speed-to-contact for sales and marketing.',
-      'Automated daily pricing collection for 200+ DTC brands, cutting manual data gathering by 45% and feeding time-series analytics.',
-      'Engineered Python / Scrapy / Playwright crawlers over 1,000+ e-commerce app listings to surface top-growth AI apps and white-space opportunities.',
+      'Automated supplier evaluation, cutting a 3-hour manual process to minutes',
+      'Combined agentic browsing with custom Python workflows for real-time data extraction',
     ],
-    tags: ['Python', 'Scrapy', 'Playwright', 'GTM analytics'],
+    tags: ['Python', 'Agentic AI', 'Energy Advisory', 'Automation Engineering', 'Financial Analytics for Energy Markets'],
   },
   {
-    company: 'Certilytics',
-    title: 'Junior Data Scientist',
-    start: 'Dec 2023',
-    end: 'Mar 2025',
-    blurb:
-      'Built and optimized ML models and data pipelines for healthcare clients — driving cost savings while monitoring performance and mitigating bias across the model suite.',
+    company: 'Qapita',
+    title: 'Independent AI Consultant',
+    start: 'Nov 2025',
+    end: 'May 2026',
+    current: false,
+    blurb: 'Freelance LLM pipeline and automation work for a fintech cap table management platform.',
     points: [
-      'Engineered transformer-based deep learning models to generate custom reports and flag high-impact contract anomalies, surfacing multi-million-dollar savings for large health plans.',
-      'Built an unsupervised feature-extraction framework that reduced 320+ SDoH features to 18 (~93% reduction) while improving predictive accuracy and reducing bias in production.',
-      'Optimized a Scala / SQL processing pipeline: 30% fewer errors and runtime cut from 5 days to 3 (40% faster).',
-      'Developed a generalized calibration pipeline that automated transfer learning across the model suite.',
+      'Built a multi-jurisdiction document automation pipeline across 15+ regulatory contexts processing over 10,000 records and cutting report generation time by 95%',
+      'Developed an LLM-based data migration pipeline with deterministic fallbacks for non-standard fields. Maintained zero data loss across full dataset transfers, cutting onboarding from days to hours',
+      'Instrumented 200+ Mixpanel events across 5 core product workflows, generating insights that directly influenced product roadmap decisions'
     ],
-    tags: ['Python', 'Scala', 'Deep Learning', 'MLOps', 'Healthcare'],
+    tags: ['Python', 'LLM Pipelines', 'RAG', 'Docker', 'Fintech', 'Automation Engineering', 'MixPanel', 'Product Analytics'],
+  },
+  {
+    company: 'Mason',
+    title: 'ML Engineer — Growth',
+    start: 'Jul 2025',
+    end: 'Oct 2025',
+    blurb: 'Growth-focused ML pipelines for sales and marketing teams.',
+    points: [
+      'Built a Python ETL pipeline aggregating multi-source social media data for ad-hoc data collection and analysis',
+      'Automated data collection and normalization for sales stakeholders, improving lead-gen productivity by 50%',
+      'Created a content analysis and personalization pipeline using Gemini Vision, reduced internal manual workload by 75%',
+    ],
+    tags: ['Python', 'ETL', 'Gemini Vision', 'Growth Analytics', 'Playwright', 'GTM'],
+  },
+  {
+    company: 'Certilytics Inc.',
+    title: 'Junior Data Scientist — Healthcare Analytics',
+    start: 'Nov 2023',
+    end: 'Mar 2025',
+    blurb: 'Deep learning and statistical modeling on claims data for Fortune 500 health plans.',
+    points: [
+      'Delivered up to $20M in contract savings by engineering deep learning anomaly detection on claims data',
+      'Reduced model input dimensionality from 320 to 17 features (95% reduction) via unsupervised feature extraction while improving predictive accuracy, and reducing bias',
+      'Automated client deployment recalibration, cutting new client setup time by 71%',
+      'Refactored a Scala/SQL data pipeline, cutting error rate 30% and runtime 40%',
+    ],
+    tags: ['Python', 'PyTorch', 'Scala', 'SQL', 'Anomaly Detection', 'Deep Learning', 'Healthcare Analytics', 'Feature Engineering', 'MLOps'],
   },
   {
     company: 'View, Inc.',
@@ -72,8 +96,17 @@ export const education = {
   years: '2018 – 2023',
 };
 
-export const certs = [
-  'AWS Certified Cloud Practitioner',
-  'Alteryx Core Certified',
-  'Deep Learning: Neural Networks',
+export interface Cert {
+  name: string;
+  href?: string;
+}
+
+export const certs: Cert[] = [
+  { name: 'Professional Certificate Programme in Agentic AI and Applications', href: "https://emeritus.skillsnetwork.site/certificates/7531928c-5ccb-4fca-bd4c-8f856854aaa5"},
+  { name: 'Generative AI for Business and Professionals', href: "https://courses.emeritus.skillsnetwork.site/certificates/2235e29c607247e1826832919bb9e9a7"},
+  { name: 'Responsible and Ethical Generative AI', href: "https://courses.emeritus.skillsnetwork.site/certificates/b7fba578281f42689d2bcf80a40fcddf" },
+  { name: 'Building AI Agents with RAG and LangChain', href: "https://courses.emeritus.skillsnetwork.site/certificates/66ff196b07914635af1224bdc52ec896" },
+  { name: 'Deep Learning: Neural Networks', href: "https://www.coursera.org/account/accomplishments/verify/UACZIF4P4094"},
+  { name: 'AWS Certified Cloud Practitioner', href: "https://www.credly.com/badges/2f0eeefd-9b43-4227-ada7-261d36c7cdbb/linked_in_profile" },
+  { name: 'Alteryx Core Certified', href: "https://www.credly.com/badges/b9b38ce3-d19f-4289-8ea4-fbbc5b2bcc90/linked_in_profile"},
 ];

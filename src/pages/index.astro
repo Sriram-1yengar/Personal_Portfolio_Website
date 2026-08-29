@@ -59,7 +59,15 @@ const work = (await getCollection('work'))
         <div>
           <p class="mono">Certifications</p>
           <ul class="edu__certs">
-            {certs.map((c) => <li>{c}</li>)}
+            {certs.map((c) => (
+              <li>
+                {c.href ? (
+                  <a href={c.href} target="_blank" rel="noopener noreferrer">{c.name}</a>
+                ) : (
+                  c.name
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -142,6 +150,17 @@ const work = (await getCollection('work'))
   .edu__certs li::before {
     content: '→ ';
     color: var(--text-faint);
+  }
+  .edu__certs a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--border-strong);
+    transition: text-decoration-color 0.15s ease, color 0.15s ease;
+  }
+  .edu__certs a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
   }
   .about {
     display: grid;
