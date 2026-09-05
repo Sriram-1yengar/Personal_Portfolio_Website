@@ -1,6 +1,6 @@
 export const site = {
   name: 'Sriram Iyengar',
-  role: 'Data Scientist',
+  role: 'Data Scientist / ML Engineer',
   location: 'Bangalore, India',
   url: 'https://sriramiyengar.me',
   description:
@@ -14,7 +14,7 @@ export const site = {
     { label: 'Email', href: 'mailto:sriramkiyengar@gmail.com' },
   ],
   nav: [
-    { label: 'Work', href: '/#work' },
+    { label: 'Projects', href: '/#projects' },
     { label: 'Experience', href: '/#experience' },
     { label: 'About', href: '/#about' },
     { label: 'Contact', href: '/#contact' },

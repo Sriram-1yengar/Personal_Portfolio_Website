@@ -1,3 +1,8 @@
+export interface PointGroup {
+  label: string;
+  items: string[];
+}
+
 export interface Role {
   company: string;
   title: string;
@@ -5,37 +10,38 @@ export interface Role {
   end: string;
   current?: boolean;
   blurb: string;
-  points: string[];
+  points: (string | PointGroup)[];
   tags: string[];
 }
 
 export const experience: Role[] = [
-    {
-    company: 'F&D Partners',
-    title: 'Independent AI Consultant',
-    start: 'June 2026',
-    end: 'Present',
-    current: true,
-    blurb: 'Freelance automation and analytics consulting for a deregulated energy advisory firm.',
-    points: [
-      'Automated supplier evaluation, cutting a 3-hour manual process to minutes',
-      'Combined agentic browsing with custom Python workflows for real-time data extraction',
-    ],
-    tags: ['Python', 'Agentic AI', 'Energy Advisory', 'Automation Engineering', 'Financial Analytics for Energy Markets'],
-  },
+
   {
-    company: 'Qapita',
+    company: 'F&D Partners / Qapita',
     title: 'Independent AI Consultant',
     start: 'Nov 2025',
-    end: 'May 2026',
-    current: false,
-    blurb: 'Freelance LLM pipeline and automation work for a fintech cap table management platform.',
+    end: 'Present',
+    current: true,
+    blurb: 'Freelance LLM pipeline, automation, and analytics consulting — a fintech cap-table platform, then a deregulated-energy advisory firm.',
     points: [
-      'Built a multi-jurisdiction document automation pipeline across 15+ regulatory contexts processing over 10,000 records and cutting report generation time by 95%',
-      'Developed an LLM-based data migration pipeline with deterministic fallbacks for non-standard fields. Maintained zero data loss across full dataset transfers, cutting onboarding from days to hours',
-      'Instrumented 200+ Mixpanel events across 5 core product workflows, generating insights that directly influenced product roadmap decisions'
+      {
+        label: 'F&D Partners — energy advisory · Jun 2026 – Present',
+        items: [
+          'Building in automations to cut down on manual processing for analysts and users on the customer facing portal.',
+          'Automated supplier evaluation, cutting a 3-hour manual analytics process to minutes',
+          'Combined agentic browsing with custom Python workflows for real-time data extraction',
+        ],
+      },
+      {
+        label: 'Qapita — fintech / cap-table platform · Nov 2025 – May 2026',
+        items: [
+          'Built a multi-jurisdiction document automation pipeline across 15+ regulatory contexts, processing 10,000+ records and cutting report generation time by 95%',
+          'Developed an LLM-based data migration pipeline with deterministic fallbacks for non-standard fields — zero data loss across full dataset transfers, cutting onboarding from days to hours',
+          'Instrumented 200+ Mixpanel events across 5 core product workflows, generating insights that directly influenced product roadmap decisions',
+        ],
+      },
     ],
-    tags: ['Python', 'LLM Pipelines', 'RAG', 'Docker', 'Fintech', 'Automation Engineering', 'MixPanel', 'Product Analytics'],
+    tags: ['Python', 'LLM Pipelines', 'RAG', 'Agentic AI', 'Docker', 'Automation Engineering', 'Fintech', 'Energy Advisory', 'Product Analytics'],
   },
   {
     company: 'Mason',

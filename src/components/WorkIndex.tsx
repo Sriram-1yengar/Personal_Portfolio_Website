@@ -31,7 +31,7 @@ export default function WorkIndex({ items }: { items: WorkItem[] }) {
 
   return (
     <div className="work">
-      <div className="work__filters" role="group" aria-label="Filter work by area">
+      <div className="work__filters" role="group" aria-label="Filter projects by area">
         {tags.map((tag) => (
           <button
             key={tag}
@@ -53,7 +53,7 @@ export default function WorkIndex({ items }: { items: WorkItem[] }) {
       <ol className="work__list">
         {filtered.map((item, idx) => (
           <li key={item.slug} className="work__item">
-            <a className="work__link" href={`/work/${item.slug}`}>
+            <a className="work__link" href={`/projects/${item.slug}`}>
               <span className="work__index">
                 {String(idx + 1).padStart(2, '0')}
               </span>

@@ -26,15 +26,14 @@ const work = (await getCollection('work'))
   <Hero />
   <StatStrip />
 
-  <section class="section" id="work">
+  <section class="section" id="projects">
     <div class="container container--wide">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">01 — Selected work</span>
+        <span class="eyebrow">01 — Selected projects</span>
         <h2>Things I’ve built</h2>
         <p>
-          Personal and academic projects where I owned the whole thing —
-          data, model, and the interface someone actually uses. Client work
-          lives on my résumé.
+          Personal projects where I owned the whole thing — data, model,
+          and the interface someone actually uses.
         </p>
       </div>
       <WorkIndex client:visible items={work} />
@@ -82,18 +81,20 @@ const work = (await getCollection('work'))
       </div>
       <div class="about" data-reveal>
         <p>
-          I’m a data scientist with a B.S. in Data Science from Penn State and
-          about two years in industry. Most of that was at Certilytics, where I
-          built transformer models and feature pipelines for healthcare cost
-          data and cared a lot about calibration, bias, and what happens after
-          a model ships. Now I’m at Mason doing go-to-market data science —
-          crawlers, pricing analytics, and market intelligence for the
-          e-commerce world.
+          I’m a data scientist and ML engineer with a B.S. from Penn State and
+          a couple years bouncing between healthcare, fintech, and energy. At
+          Certilytics I built deep-learning anomaly detection on healthcare
+          claims data (helped save health plans $20M+); since then I’ve moved
+          into freelance AI consulting, building LLM pipelines and automation
+          systems for fintech and energy clients — deliberately choosing the
+          consulting model to work across more problems, faster, than one role
+          would let me.
         </p>
         <p>
-          Outside of work I fine-tune small LLMs, build GenAI tools, and take on
-          the occasional oddball project. When I’m off the keyboard: reading,
-          pickleball, and the gym.
+          Outside of work I’m usually strength training, playing padel, or
+          messing around with some LLM side project that has no business plan
+          attached. I also enjoy reading so if you have any book recommendations 
+          you'd like to share, drop me a message!
         </p>
       </div>
     </div>

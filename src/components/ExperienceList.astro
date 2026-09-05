@@ -17,9 +17,20 @@ import { experience } from '../data/experience';
         <p class="xp__blurb">{role.blurb}</p>
         {role.points.length > 0 && (
           <ul class="xp__points">
-            {role.points.map((p) => (
-              <li>{p}</li>
-            ))}
+            {role.points.map((p) =>
+              typeof p === 'string' ? (
+                <li>{p}</li>
+              ) : (
+                <li class="xp__group">
+                  <span class="xp__group-label mono">{p.label}</span>
+                  <ul class="xp__points">
+                    {p.items.map((it) => (
+                      <li>{it}</li>
+                    ))}
+                  </ul>
+                </li>
+              )
+            )}
           </ul>
         )}
         <div class="xp__tags">
@@ -92,6 +103,21 @@ import { experience } from '../data/experience';
   }
   .xp__points li::marker {
     color: var(--text-faint);
+  }
+  .xp__group {
+    list-style: none;
+    margin-left: -1.1rem;
+  }
+  .xp__group-label {
+    display: block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+  .xp__group + .xp__group {
+    margin-top: 0.7rem;
   }
   .xp__tags {
     display: flex;
