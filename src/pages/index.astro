@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import StatStrip from '../components/StatStrip.astro';
+import WorkIndex, { type WorkItem } from '../components/WorkIndex.tsx';
+import ExperienceList from '../components/ExperienceList.astro';
+import Recommendations from '../components/Recommendations.astro';
+import Contact from '../components/Contact.astro';
+import { education, certs } from '../data/experience';
+
+const work = (await getCollection('work'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map<WorkItem>((entry) => ({
+    slug: entry.id,
+    title: entry.data.title,
+    summary: entry.data.summary,
+    year: entry.data.year,
+    status: entry.data.status,
+    tags: entry.data.tags,
+    stack: entry.data.stack,
+  }));
+---
+
+<Base>
+  <Hero />
+  <StatStrip />
+
+  <section class="section" id="projects">
+    <div class="container container--wide">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">01 — Selected projects</span>
+        <h2>Things I’ve built</h2>
+        <p>
+          Personal projects where I owned the whole thing — data, model,
+          and the interface someone actually uses.
+        </p>
+      </div>
+      <WorkIndex client:visible items={work} />
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="container container--wide">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">02 — Experience</span>
+        <h2>Where I’ve worked</h2>
+      </div>
+      <ExperienceList />
+
+      <div class="edu" data-reveal>
+        <div>
+          <p class="mono">Education</p>
+          <p class="edu__degree">{education.degree}, {education.school}</p>
+          <p class="edu__detail">{education.detail}</p>
+          <p class="edu__years mono">{education.years}</p>
+        </div>
+        <div>
+          <p class="mono">Certifications</p>
+          <ul class="edu__certs">
+            {certs.map((c) => (
+              <li>
+                {c.href ? (
+                  <a href={c.href} target="_blank" rel="noopener noreferrer">{c.name}</a>
+                ) : (
+                  c.name
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container container--wide">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">03 — About</span>
+        <h2>Short version</h2>
+      </div>
+      <div class="about" data-reveal>
+        <p>
+          I’m a data scientist and ML engineer with a B.S. from Penn State and
+          a couple years bouncing between healthcare, fintech, and energy. At
+          Certilytics I built deep-learning anomaly detection on healthcare
+          claims data (helped save health plans $20M+); since then I’ve moved
+          into freelance AI consulting, building LLM pipelines and automation
+          systems for fintech and energy clients — deliberately choosing the
+          consulting model to work across more problems, faster, than one role
+          would let me.
+        </p>
+        <p>
+          Outside of work I’m usually strength training, playing padel, or
+          messing around with some LLM side project that has no business plan
+          attached. I also enjoy reading so if you have any book recommendations 
+          you'd like to share, drop me a message!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="recommendations">
+    <div class="container container--wide">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">04 — Recommendations</span>
+        <h2>What colleagues say</h2>
+      </div>
+      <Recommendations />
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container container--wide">
+      <Contact />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .edu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+  }
+  .edu .mono {
+    margin-bottom: var(--space-xs);
+  }
+  .edu__degree {
+    font-weight: 600;
+  }
+  .edu__detail {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    margin-top: 0.2rem;
+    max-width: 44ch;
+  }
+  .edu__years {
+    margin-top: 0.3rem;
+  }
+  .edu__certs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: var(--text-sm);
+  }
+  .edu__certs li::before {
+    content: '→ ';
+    color: var(--text-faint);
+  }
+  .edu__certs a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--border-strong);
+    transition: text-decoration-color 0.15s ease, color 0.15s ease;
+  }
+  .edu__certs a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+  .about {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    gap: var(--space-lg);
+    max-width: 68rem;
+  }
+  .about p {
+    font-size: var(--text-lg);
+    color: var(--text);
+  }
+  @media (max-width: 620px) {
+    .edu {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

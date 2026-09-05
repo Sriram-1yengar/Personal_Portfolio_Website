@@ -1,0 +1,221 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const statusLabel = {
+  shipped: 'Shipped',
+  'in-progress': 'In progress',
+  archived: 'Archived',
+}[d.status];
+---
+
+<Base title={d.title} description={d.summary}>
+  <article class="case">
+    <div class="container">
+      <a class="back arrow-link" href="/#projects">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        All projects
+      </a>
+
+      <header class="case__head" data-reveal>
+        <p class="eyebrow">{d.timeframe ?? d.year} · {d.role}</p>
+        <h1>{d.title}</h1>
+        <p class="case__summary">{d.summary}</p>
+
+        <dl class="case__facts">
+          <div>
+            <dt class="mono">Status</dt>
+            <dd>{statusLabel}</dd>
+          </div>
+          <div>
+            <dt class="mono">Stack</dt>
+            <dd>{d.stack.join(' · ')}</dd>
+          </div>
+          <div>
+            <dt class="mono">Areas</dt>
+            <dd>{d.tags.join(' · ')}</dd>
+          </div>
+          {d.links.length > 0 && (
+            <div>
+              <dt class="mono">Links</dt>
+              <dd class="case__links">
+                {d.links.map((l) => (
+                  <a class="link" href={l.href} target="_blank" rel="noopener">{l.label}</a>
+                ))}
+              </dd>
+            </div>
+          )}
+        </dl>
+
+        {d.metrics.length > 0 && (
+          <ul class="case__metrics">
+            {d.metrics.map((m) => (
+              <li>
+                <span class="case__metric-value">{m.value}</span>
+                <span class="case__metric-label">{m.label}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <footer class="case__foot">
+        <a class="btn btn--ghost" href="/#projects">← Back to all projects</a>
+        <a class="btn" href="/#contact">Get in touch</a>
+      </footer>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .case {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+  .case .container {
+    max-width: 46rem;
+  }
+  .back {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .case__head {
+    margin-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
+  }
+  .case__head h1 {
+    font-size: var(--text-3xl);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+  .case__summary {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 56ch;
+  }
+  .case__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+  .case__facts dt {
+    margin-bottom: 0.3rem;
+  }
+  .case__facts dd {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+  .case__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .case__metrics {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+  }
+  .case__metric-value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--accent);
+  }
+  .case__metric-label {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-snug);
+    margin-top: 0.2rem;
+  }
+
+  .case__foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+  }
+</style>
+
+<style is:global>
+  .prose {
+    margin-top: var(--space-xl);
+  }
+  .prose > * + * {
+    margin-top: var(--space-md);
+  }
+  .prose h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-sm);
+  }
+  .prose h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-lg);
+  }
+  .prose p,
+  .prose li {
+    color: var(--text);
+    line-height: var(--leading-normal);
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .prose li::marker {
+    color: var(--text-faint);
+  }
+  .prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose strong {
+    font-weight: 600;
+  }
+  .prose pre {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+  .prose :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+  }
+</style>

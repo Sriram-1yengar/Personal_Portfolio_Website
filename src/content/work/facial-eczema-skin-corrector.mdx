@@ -1,0 +1,58 @@
+---
+title: Skin Relief & Color Correction Tool
+summary: "Built to solve a problem I was actually dealing with — visible facial redness from eczema that most photo tools either ignore or oversmooth into something fake-looking. Detects redness and skin texture and corrects it subtly, in-browser, with nothing ever leaving your device."
+year: 2025
+role: Solo — UX/UI design, computer vision algorithms, web app development
+timeframe: 4 days
+status: shipped
+featured: true
+order: 1
+tags: ['Computer Vision']
+stack: ['React 18', 'TypeScript', 'Tailwind CSS', 'HTML5 Canvas', 'Vite']
+links:
+  - { label: 'GitHub', href: 'https://github.com/Sriram-1yengar/skin-redness-corrections-engine' }
+  - { label: 'Live demo', href: 'https://skin-relief-and-color-correction-tool.ai.studio' }
+metrics:
+  - { value: '0 ms', label: 'Cloud latency (100% client-side)' }
+  - { value: '0 KB', label: 'Data sent to external servers' }
+  - { value: '60 FPS', label: 'Real-time Canvas filter pipeline' }
+---
+
+## Context
+As someone that lives with facial eczema and skin flare-ups, the resulting redness often causes social discomfort and photo hesitation. Generic photo-editing tools either apply heavy, artificial beauty filters that distort facial structure or require manual cosmetic touch-ups that feel unnatural and invasive.
+
+## Problem
+Build a lightweight, non-cosmetic portrait adjustment tool that reduces elevated red or pink tones and softens rough, flaky skin textures while preserving authentic facial anatomy (eyes, eyelashes, lips, hair) — operating entirely in-memory on the client device without uploading personal photos to any server.
+
+## Approach
+- **Selective Redness Detection & Correction.** Analyzes per-pixel RGB/HSL ratios across skin-tone color spaces to isolate hyper-elevated red channels. Shifts those values toward the user's surrounding skin tone or an eyedropper-calibrated reference patch rather than applying an artificial color wash.
+- **Edge-Preserving Bilateral Smoothing.** Implements an in-browser bilateral filtering approximation that calculates local intensity gradients. Smooths low-gradient, rough skin regions while locking high-contrast structural edges (eyelashes, irises, lips, hair borders) to maintain natural sharpness.
+- **Interactive Comparative Interface.** Built an interactive split-slider viewer, side-by-side view, and hold-to-compare inspection modes with preset intensity levels (Subtle, Balanced, Full Coverage, Texture Only) alongside high-contrast accessibility controls.
+- **Strict Client-Side Isolation.** Leveraged HTML5 Canvas 2D buffers and web workers for zero-upload, zero-persistence processing, guaranteeing absolute user privacy for sensitive personal portraits.
+- **Zero touch-up or or Facial Feature Morphing Functionality.** The platform striclty does not contain any features that allow the user to morphg or change any aspects of the uploaded image. The tool's sole purpose is to tone down the redness and skin color change caused by facial eczema, and save good pictures that couldn't be used due to rashes.
+## Architecture
+
+```
+[User Image / Camera]
+        │
+        ▼
+[Offscreen Canvas Buffer] ────► [Eyedropper Skin Sampler]
+        │                                │
+        ├────────────────────────────────┘
+        ▼
+[Skin-Tone Mask & Redness Isolator] ──► detects elevated red channels
+        │
+        ▼
+[Bilateral Texture Smoothing Engine] ──► locks high-contrast edges
+        │
+        ▼
+[Global Exposure / Tint Balancer]
+        │
+        ▼
+[Interactive Multi-Mode Viewer] (split-slider / side-by-side / single view)
+```
+
+## Results
+- Delivered real-time (sub-30ms) processing on standard portrait dimensions with immediate visual feedback across desktop and mobile browsers.
+- Eliminated server dependencies and third-party tracking, achieving total client-side privacy compliance with zero data egress.
+- Successfully separated texture smoothing from facial edge preservation, preventing the "plastic airbrush" look common to automated portrait filters.

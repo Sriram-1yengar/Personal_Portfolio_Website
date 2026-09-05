@@ -1,0 +1,49 @@
+---
+title: Satellite Land Classification
+summary: A big-data pipeline that processes multi-source satellite imagery with PySpark and runs supervised models for multi-class land classification, reaching 73.2% accuracy.
+year: 2023
+role: Academic project — data processing, modeling, evaluation
+timeframe: '2023'
+status: archived
+featured: true
+order: 3
+tags: ['Computer Vision', 'Data Engineering']
+stack: ['Python', 'PySpark', 'scikit-learn', 'XGBoost', 'Matplotlib']
+links: []
+metrics:
+  - { value: '73.2%', label: 'Multi-class accuracy' }
+  - { value: '3 sources', label: 'Landsat 8, Sentinel-1 & -2' }
+  - { value: 'PySpark', label: 'Distributed processing' }
+---
+
+## Context
+
+Land-cover classification from satellite imagery is a real workload: the raw data is
+large, multi-band, and comes from sensors with different resolutions and revisit
+times. It is a good place to practice distributed data handling rather than toy
+in-memory ML.
+
+## Problem
+
+Combine imagery from three satellite sources into one labeled dataset and train
+models that assign each parcel to a land-cover class.
+
+## Approach
+
+- **Data.** Pulled imagery from Radiant MLHub — Landsat 8, Sentinel-1, and
+  Sentinel-2 — covering optical and radar bands.
+- **Processing.** Used PySpark to align, resample, and stack bands into feature
+  vectors per location, and to join imagery with ground-truth labels at scale.
+- **Modeling.** Trained and compared several supervised classifiers
+  (scikit-learn and XGBoost), tuning on a held-out split.
+- **Evaluation.** Reported multi-class accuracy and per-class confusion to see
+  which land types the sensors could and couldn't separate.
+
+## Results
+
+The best model reached **73.2%** multi-class accuracy. The instructive part was the
+error structure: classes with distinct radar or spectral signatures separated
+cleanly, while visually similar vegetation classes drove most of the confusion —
+a limitation of the input bands, not the classifier.
+
+{/* TODO(sriram): add repo/report link; add the per-class confusion figure. */}

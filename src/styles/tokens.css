@@ -1,0 +1,116 @@
+/* ============================================================
+   Design tokens
+   Light-first. Dark palette mirrors every role 1:1.
+   ============================================================ */
+
+:root {
+  /* Neutrals — warm paper, not blue-gray */
+  --bg: #fbfaf8;
+  --bg-subtle: #f2f0ea;
+  --surface: #ffffff;
+  --text: #1c1a17;
+  --text-muted: #6a6357;
+  --text-faint: #928b7e;
+  --border: #e5e1d8;
+  --border-strong: #d3ccbe;
+
+  /* Accent — clear blue. Sparing use: links, marks, active state. */
+  --accent: #2f6feb;
+  --accent-hover: #1f5fd6;
+  --accent-text: #ffffff;
+  --accent-weak: #e7f0fd;
+
+  --focus: var(--accent);
+  --selection: #cfe2fb;
+
+  /* Ambient background layer */
+  --grid-dot: rgba(31, 58, 90, 0.07);
+  --glow-opacity: 0.05;
+
+  /* Type families */
+  --font-sans: 'Inter Variable', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk Variable', 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.1rem);
+  --text-3xl: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  --text-display: clamp(2.5rem, 1.2rem + 5.4vw, 4.75rem);
+
+  --leading-tight: 1.12;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+
+  /* Spacing */
+  --space-2xs: 0.375rem;
+  --space-xs: 0.625rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6.5rem;
+  --space-3xl: 9rem;
+
+  /* Layout */
+  --container: 68rem;
+  --container-wide: 78rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --dur: 220ms;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e1521;
+  --bg-subtle: #131d2c;
+  --surface: #16202f;
+  --text: #e9eef6;
+  --text-muted: #a2b2c6;
+  --text-faint: #6d7e95;
+  --border: #243146;
+  --border-strong: #33435d;
+
+  --accent: #2f6feb;
+  --accent-hover: #5b8ff2;
+  --accent-text: #ffffff;
+  --accent-weak: #15263c;
+
+  --selection: #1e3a5c;
+
+  --grid-dot: rgba(150, 180, 220, 0.06);
+  --glow-opacity: 0.09;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0e1521;
+    --bg-subtle: #131d2c;
+    --surface: #16202f;
+    --text: #e9eef6;
+    --text-muted: #a2b2c6;
+    --text-faint: #6d7e95;
+    --border: #243146;
+    --border-strong: #33435d;
+
+    --accent: #2f6feb;
+    --accent-hover: #5b8ff2;
+    --accent-text: #ffffff;
+    --accent-weak: #15263c;
+
+    --selection: #1e3a5c;
+
+    --grid-dot: rgba(150, 180, 220, 0.06);
+    --glow-opacity: 0.09;
+  }
+}

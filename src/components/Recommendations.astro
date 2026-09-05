@@ -1,0 +1,65 @@
+---
+import { recommendations } from '../data/recommendations';
+---
+
+<div class="recs">
+  {recommendations.map((r) => (
+    <figure class="rec" data-reveal>
+      <blockquote>{r.quote}</blockquote>
+      <figcaption>
+        <span class="rec__name">{r.name}</span>
+        <span class="rec__role">{r.title}</span>
+        <span class="rec__org mono">{r.org}</span>
+      </figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  .recs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: var(--space-md);
+  }
+  .rec {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .rec blockquote {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--text);
+  }
+  .rec blockquote::before {
+    content: '“';
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 1.4em;
+    line-height: 0;
+    margin-right: 0.1ch;
+  }
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border);
+  }
+  .rec__name {
+    font-weight: 600;
+  }
+  .rec__role {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .rec__org {
+    margin-top: 0.15rem;
+    font-size: 0.68rem;
+  }
+</style>

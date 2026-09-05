@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found" noindex>
+  <section class="nf">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1>This page wandered off.</h1>
+      <p>The link is broken or the page moved.</p>
+      <a class="btn" href="/">Back home</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: var(--space-3xl);
+  }
+  .nf h1 {
+    font-size: var(--text-3xl);
+    margin-block: var(--space-sm) var(--space-sm);
+  }
+  .nf p {
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+</style>
