@@ -19,7 +19,7 @@ Most lead-gen tools either need heavy manual setup per company or are hardcoded 
 
 ## Problem
 
-Build a pipeline that takes any seller's profile and target ICP as input, discovers candidate companies, and ranks them primarily by *verifiable evidence* of buying signal — not by a fit score alone, which is easy to hallucinate confidently.
+Build a pipeline that takes any seller's profile, analyzes their company to generate a target ICP, uses this ICP to discover candidate companies, and ranks them primarily by *verifiable evidence* of buying signal — not by a fit score alone, which is easy to hallucinate confidently.
 
 ## Approach
 
@@ -30,6 +30,7 @@ Build a pipeline that takes any seller's profile and target ICP as input, discov
 - **Forced structured output.** Every stage uses tool-call forcing rather than "output JSON" prompting, with schema constraints (numeric bounds, enums, array size limits) doing validation work a text prompt can't guarantee.
 - **Heavy anti-pattern prompting over few-shot.** Rather than example-based prompting, the system prompts lean on explicit negative instruction — "hallucinated companies are worse than fewer companies," "an empty list is a valid, honest output" — paired with an adversarial framing for the verification stage ("treat every claim as if it will be checked immediately").
 - **Tested against adversarial cases, not just happy paths.** The test suite includes live checks that deliberately try to trick the pipeline — a fabricated claim citing a real page that doesn't actually support it, a claim citing a dead URL — and asserts the pipeline drops them.
+- **Exclusion of current clients** The pipeline also takes into account the companies that the seller already has business with through an independent search + the option for the user to input information as to who their current clients are. This saves the pipeline from doing twice the amount of work and ending up with leads that are useless. This information is also useful to set precedent for other potential deals, i.e. if a seller does business with one existing client that belongs to a certain domain, the pipeline identifies that and is able to look for similar enetities across the same/different domain and use the existing deal as precedent along with some other signals to consider a sperate list of companies as clients.
 
 ## Architecture
 
@@ -63,4 +64,4 @@ Ranked leads, each with sourced evidence
 
 ## Results
 
-Verified with a mix of deterministic offline tests (does the code actually drop an ungrounded citation?) and live adversarial tests against real search and real pages — including one that plants a fabricated claim on a real, well-known company's Wikipedia page and confirms the pipeline rejects it while accepting the true claim from the same source. The seller/ICP inputs are fully parameterized; one hardcoded assumption remains in the contact-lookup fallback (a customer-support-title bias), noted as a known limitation rather than smoothed over.
+The engine finally generates a ranked list of companies that exhibit a strong business potential signal. All the information used for the rankings is grounded in citations that are present on the results page. Each resulting company also comes with a name for the ideal POC, a short explanation as to why this is a good business opportunity to pursue - explicit or implied signal- and the relevant citations to support the information being used in the rankings.
