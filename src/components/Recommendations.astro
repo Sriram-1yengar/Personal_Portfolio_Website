@@ -3,8 +3,8 @@ import { recommendations } from '../data/recommendations';
 ---
 
 <div class="recs">
-  {recommendations.map((r) => (
-    <figure class="rec" data-reveal>
+  {recommendations.map((r, i) => (
+    <figure class={`rec ${i === 0 ? 'rec--featured' : ''}`} data-reveal={i === 0 ? 'scale' : 'up'}>
       <blockquote>{r.quote}</blockquote>
       <figcaption>
         <span class="rec__name">{r.name}</span>
@@ -18,7 +18,7 @@ import { recommendations } from '../data/recommendations';
 <style>
   .recs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
   }
   .rec {
@@ -29,6 +29,19 @@ import { recommendations } from '../data/recommendations';
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--surface);
+  }
+  .rec--featured {
+    grid-column: 1 / -1;
+    padding: var(--space-lg);
+    background: var(--accent-weak);
+    border-color: transparent;
+  }
+  .rec--featured blockquote {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    max-width: 56ch;
   }
   .rec blockquote {
     font-size: var(--text-base);
@@ -51,6 +64,9 @@ import { recommendations } from '../data/recommendations';
     padding-top: var(--space-sm);
     border-top: 1px solid var(--border);
   }
+  .rec--featured figcaption {
+    border-top-color: var(--border-strong);
+  }
   .rec__name {
     font-weight: 600;
   }
@@ -61,5 +77,10 @@ import { recommendations } from '../data/recommendations';
   .rec__org {
     margin-top: 0.15rem;
     font-size: 0.68rem;
+  }
+  @media (max-width: 700px) {
+    .recs {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

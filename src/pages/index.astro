@@ -26,24 +26,9 @@ const work = (await getCollection('work'))
   <Hero />
   <StatStrip />
 
-  <section class="section" id="projects">
-    <div class="container container--wide">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">01 — Selected projects</span>
-        <h2>Things I’ve built</h2>
-        <p>
-          Personal projects where I owned the whole thing — data, model,
-          and the interface someone actually uses.
-        </p>
-      </div>
-      <WorkIndex client:visible items={work} />
-    </div>
-  </section>
-
   <section class="section" id="experience">
     <div class="container container--wide">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">02 — Experience</span>
         <h2>Where I’ve worked</h2>
       </div>
       <ExperienceList />
@@ -73,10 +58,23 @@ const work = (await getCollection('work'))
     </div>
   </section>
 
-  <section class="section" id="about">
+  <section class="section section--tint" id="projects">
     <div class="container container--wide">
+      <div class="section-head section-head--lg" data-reveal>
+        <span class="eyebrow">Selected projects</span>
+        <h2>Things I’ve built</h2>
+        <p>
+          Personal projects where I owned the whole thing — data, model,
+          and the interface someone actually uses.
+        </p>
+      </div>
+      <WorkIndex client:visible items={work} />
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">03 — About</span>
         <h2>Short version</h2>
       </div>
       <div class="about" data-reveal>
@@ -101,16 +99,15 @@ const work = (await getCollection('work'))
   </section>
 
   <section class="section" id="recommendations">
-    <div class="container container--wide">
+    <div class="container">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">04 — Recommendations</span>
         <h2>What colleagues say</h2>
       </div>
       <Recommendations />
     </div>
   </section>
 
-  <section class="section" id="contact">
+  <section class="section section--tint" id="contact">
     <div class="container container--wide">
       <Contact />
     </div>
@@ -165,13 +162,31 @@ const work = (await getCollection('work'))
   }
   .about {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
-    gap: var(--space-lg);
-    max-width: 68rem;
+    grid-template-columns: 1.25fr 1fr;
+    gap: var(--space-xl);
   }
   .about p {
-    font-size: var(--text-lg);
     color: var(--text);
+  }
+  .about p:first-child {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: var(--leading-snug);
+  }
+  .about p:last-child {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    padding-top: 0.3rem;
+  }
+  .section-head--lg h2 {
+    font-size: clamp(2.4rem, 1.6rem + 3vw, 3.6rem);
+  }
+  @media (max-width: 720px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
   }
   @media (max-width: 620px) {
     .edu {
