@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import './WorkIndex.css';
 
 export interface WorkItem {
@@ -50,48 +50,57 @@ export default function WorkIndex({ items }: { items: WorkItem[] }) {
         ))}
       </div>
 
-      <ol className="work__list">
+      <ol className="work__grid">
         {filtered.map((item, idx) => (
-          <li key={item.slug} className="work__item">
+          <li
+            key={item.slug}
+            className="work__card"
+            data-reveal
+            style={{ '--reveal-delay': `${idx * 70}ms` } as CSSProperties}
+          >
             <a className="work__link" href={`/projects/${item.slug}`}>
-              <span className="work__index">
-                {String(idx + 1).padStart(2, '0')}
-              </span>
-              <span className="work__body">
-                <span className="work__head">
-                  <span className="work__title">{item.title}</span>
-                  <span className="work__meta">
-                    <span className={`work__status work__status--${item.status}`}>
-                      {STATUS_LABEL[item.status]}
-                    </span>
-                    <span className="work__year">{item.year}</span>
+              <div className="work__card-top">
+                <span className="work__index mono">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <span className="work__meta">
+                  <span className={`work__status work__status--${item.status}`}>
+                    {STATUS_LABEL[item.status]}
                   </span>
+                  <span className="work__year">{item.year}</span>
                 </span>
-                <span className="work__summary">{item.summary}</span>
-                <span className="work__tags">
-                  {item.stack.slice(0, 5).map((s) => (
-                    <span key={s} className="work__tag">
-                      {s}
-                    </span>
-                  ))}
-                </span>
+              </div>
+
+              <h3 className="work__title">{item.title}</h3>
+              <p className="work__summary">{item.summary}</p>
+
+              <span className="work__tags">
+                {item.stack.slice(0, 5).map((s) => (
+                  <span key={s} className="work__tag">
+                    {s}
+                  </span>
+                ))}
               </span>
-              <svg
-                className="work__arrow"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4 8h8M9 4l3.5 4L9 12"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+
+              <span className="work__cta">
+                Explore
+                <svg
+                  className="work__arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 8h8M9 4l3.5 4L9 12"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </a>
           </li>
         ))}
