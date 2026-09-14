@@ -1,6 +1,5 @@
 ---
 import { site } from '../site';
-import Avatar from './Avatar.tsx';
 ---
 
 <section class="hero" id="top">
@@ -35,34 +34,44 @@ import Avatar from './Avatar.tsx';
   </svg>
 
   <div class="container container--wide">
-    <div class="hero__top">
-      <p class="eyebrow" data-reveal>{site.role} · {site.location}</p>
-      <div class="hero__avatar" data-reveal="scale">
-        <Avatar client:idle size={168} />
+    <div class="hero__layout">
+      <div class="hero__main">
+        <p class="eyebrow" data-reveal>{site.role} · {site.location}</p>
+
+        <h1 data-reveal>
+          I build <span class="grad">ML and AI systems</span> that solve real problems,<br />
+          for businesses and for people.
+        </h1>
+
+        <p class="sub" data-reveal>
+          ~3 years shipping Machine Learning models, GenAI pipelines, and
+          automation systems — from $20M+ in claims savings at a healthcare
+          analytics firm to cutting multi-day workflows down to minutes for
+          fintech and energy clients. Currently freelancing as an independent
+          AI consultant.
+        </p>
+
+        <div class="cta" data-reveal>
+          <a class="btn" href="#projects">
+            View projects
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="btn btn--ghost" href="#contact">Get in touch</a>
+        </div>
       </div>
-    </div>
 
-    <h1 data-reveal>
-      I build <span class="grad">ML and AI systems</span> that solve real problems,<br />
-      for businesses and for people.
-    </h1>
-
-    <p class="sub" data-reveal>
-      ~3 years shipping Machine Learning models, GenAI pipelines, and
-      automation systems — from $20M+ in claims savings at a healthcare
-      analytics firm to cutting multi-day workflows down to minutes for
-      fintech and energy clients. Currently freelancing as an independent
-      AI consultant.
-    </p>
-
-    <div class="cta" data-reveal>
-      <a class="btn" href="#projects">
-        View projects
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <a class="btn btn--ghost" href="#contact">Get in touch</a>
+      <div class="hero__avatar" data-reveal="scale">
+        <img
+          class="hero__avatar-img"
+          src="/avatar.png"
+          alt={`Illustrated portrait of ${site.name}`}
+          width="300"
+          height="300"
+          loading="eager"
+        />
+      </div>
     </div>
 
     <dl class="meta-strip" data-reveal>
@@ -117,27 +126,43 @@ import Avatar from './Avatar.tsx';
     }
   }
 
-  .hero__top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-md);
+  .hero__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: var(--space-xl);
+  }
+
+  .hero__main {
+    min-width: 0;
   }
 
   .hero__avatar {
     position: relative;
     isolation: isolate;
-    flex-shrink: 0;
-    margin-top: -1.75rem;
+    justify-self: end;
+    margin-top: 0.25rem;
+    padding: var(--space-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
   }
   .hero__avatar::before {
     content: '';
     position: absolute;
-    inset: -30%;
+    inset: -20%;
+    z-index: -1;
     background: radial-gradient(circle, var(--accent) 0%, var(--accent-2) 55%, transparent 72%);
-    opacity: 0.24;
-    filter: blur(30px);
+    opacity: 0.28;
+    filter: blur(38px);
     pointer-events: none;
+  }
+  .hero__avatar-img {
+    display: block;
+    width: clamp(180px, 19vw, 300px);
+    height: clamp(180px, 19vw, 300px);
+    object-fit: contain;
+    border-radius: var(--radius);
   }
 
   h1 {
@@ -192,9 +217,18 @@ import Avatar from './Avatar.tsx';
     color: var(--accent);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 780px) {
+    .hero__layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
     .hero__avatar {
-      margin-top: 0;
+      justify-self: center;
+      order: -1;
+    }
+    .hero__avatar-img {
+      width: clamp(140px, 40vw, 220px);
+      height: clamp(140px, 40vw, 220px);
     }
     h1 {
       max-width: none;
