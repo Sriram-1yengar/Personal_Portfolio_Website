@@ -1,0 +1,81 @@
+.avatar {
+  display: block;
+  position: relative;
+  color: var(--text);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.avatar__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Pupils: driven imperatively by the rAF loop — no CSS transition, the JS eases. */
+.avatar__pupil {
+  will-change: transform;
+}
+
+/* Eyes group gets a tiny head-follow nudge from JS. */
+.avatar__eyes {
+  will-change: transform;
+}
+
+/* --- blink --- */
+.avatar__lid {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 70ms ease;
+}
+.avatar.is-blinking .avatar__lid {
+  opacity: 1;
+}
+.avatar.is-blinking .avatar__pupil,
+.avatar.is-blinking .avatar__sclera {
+  opacity: 0;
+}
+
+/* --- hover the face --- */
+.avatar__eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 160ms var(--ease);
+}
+.avatar.is-alert .avatar__eye {
+  transform: scaleY(1.09);
+}
+
+/* --- brow raise (hovering an interactive element anywhere) --- */
+.avatar__brow {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 160ms var(--ease);
+}
+.avatar.is-brow-raised .avatar__brow,
+.avatar.is-alert .avatar__brow {
+  transform: translateY(-2px);
+}
+
+/* --- mouth: state-driven (phase 2). `d` transition is progressive enhancement. --- */
+.avatar__mouth {
+  transition: d 180ms var(--ease);
+}
+
+/* --- idle float — motion only, and only when the user allows it --- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes avatar-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+  .avatar__body {
+    animation: avatar-float 4.6s var(--ease) infinite;
+  }
+}

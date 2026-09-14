@@ -1,72 +1,163 @@
 ---
 import { site } from '../site';
+import Avatar from './Avatar.tsx';
 ---
 
 <section class="hero" id="top">
-  <div class="container container--wide grid">
-    <div class="lead" data-reveal>
-      <p class="eyebrow">{site.role} · {site.location}</p>
-      <h1>
-        I build ML and AI systems that solve real problems,<br />
-        for businesses and for people.
-      </h1>
-      <p class="sub">
-        ~3 years shipping Machine Learning models, GenAI pipelines, and
-        automation systems — from $20M+ in claims savings at a healthcare
-        analytics firm to cutting multi-day workflows down to minutes for
-        fintech and energy clients. Currently freelancing as an independent
-        AI consultant.
-      </p>
-      <div class="cta">
-        <a class="btn" href="#projects">
-          View projects
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a class="btn btn--ghost" href="#contact">Get in touch</a>
+  <svg class="hero__network" viewBox="0 0 900 480" fill="none" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
+    <g stroke="var(--accent)" stroke-width="1">
+      <line x1="560" y1="90" x2="700" y2="60" />
+      <line x1="560" y1="90" x2="640" y2="180" />
+      <line x1="700" y1="60" x2="820" y2="120" />
+      <line x1="640" y1="180" x2="760" y2="230" />
+      <line x1="640" y1="180" x2="580" y2="280" />
+      <line x1="760" y1="230" x2="860" y2="200" />
+      <line x1="760" y1="230" x2="820" y2="330" />
+      <line x1="580" y1="280" x2="660" y2="380" />
+      <line x1="580" y1="280" x2="470" y2="330" />
+      <line x1="660" y1="380" x2="770" y2="410" />
+    </g>
+    <g fill="var(--accent-2)">
+      <circle cx="560" cy="90" r="4" />
+      <circle cx="640" cy="180" r="4" />
+      <circle cx="580" cy="280" r="4" />
+      <circle cx="660" cy="380" r="4" />
+    </g>
+    <g fill="var(--accent)">
+      <circle cx="700" cy="60" r="3.5" />
+      <circle cx="820" cy="120" r="3.5" />
+      <circle cx="760" cy="230" r="3.5" />
+      <circle cx="860" cy="200" r="3.5" />
+      <circle cx="820" cy="330" r="3.5" />
+      <circle cx="470" cy="330" r="3.5" />
+      <circle cx="770" cy="410" r="3.5" />
+    </g>
+  </svg>
+
+  <div class="container container--wide">
+    <div class="hero__top">
+      <p class="eyebrow" data-reveal>{site.role} · {site.location}</p>
+      <div class="hero__avatar" data-reveal="scale">
+        <Avatar client:idle size={168} />
       </div>
     </div>
 
-    <aside class="facts" data-reveal>
-      <dl>
-        <div>
-          <dt class="mono">Now</dt>
-          <dd>Independent AI Consultant, <span>F&amp;D Partners</span></dd>
-        </div>
-        <div>
-          <dt class="mono">Focus</dt>
-          <dd>LLM pipelines &amp; Agentic AI · Automation engineering · Machine Learning for Prediction and Classification</dd>
-        </div>
-        <div>
-          <dt class="mono">Toolbelt</dt>
-          <dd>Python · SQL · Agentic AI · Machine Learning · PyTorch</dd>
-        </div>
-        <div>
-          <dt class="mono">Education</dt>
-          <dd>B.S. Data Science, Penn State</dd>
-        </div>
-      </dl>
-    </aside>
+    <h1 data-reveal>
+      I build <span class="grad">ML and AI systems</span> that solve real problems,<br />
+      for businesses and for people.
+    </h1>
+
+    <p class="sub" data-reveal>
+      ~3 years shipping Machine Learning models, GenAI pipelines, and
+      automation systems — from $20M+ in claims savings at a healthcare
+      analytics firm to cutting multi-day workflows down to minutes for
+      fintech and energy clients. Currently freelancing as an independent
+      AI consultant.
+    </p>
+
+    <div class="cta" data-reveal>
+      <a class="btn" href="#projects">
+        View projects
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a class="btn btn--ghost" href="#contact">Get in touch</a>
+    </div>
+
+    <dl class="meta-strip" data-reveal>
+      <div>
+        <dt class="mono">Now</dt>
+        <dd>Independent AI Consultant, <span>F&amp;D Partners</span></dd>
+      </div>
+      <div>
+        <dt class="mono">Focus</dt>
+        <dd>LLM pipelines &amp; Agentic AI · Automation engineering · Machine Learning for Prediction and Classification</dd>
+      </div>
+      <div>
+        <dt class="mono">Toolbelt</dt>
+        <dd>Python · SQL · Agentic AI · Machine Learning · PyTorch</dd>
+      </div>
+      <div>
+        <dt class="mono">Education</dt>
+        <dd>B.S. Data Science, Penn State</dd>
+      </div>
+    </dl>
   </div>
 </section>
 
 <style>
   .hero {
+    position: relative;
     padding-block: var(--space-2xl) var(--space-xl);
+    overflow: clip;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-    gap: var(--space-2xl);
-    align-items: start;
+
+  .hero__network {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.12;
+    animation: network-breathe 22s ease-in-out infinite alternate;
   }
-  .lead h1 {
+  @keyframes network-breathe {
+    from {
+      opacity: 0.08;
+    }
+    to {
+      opacity: 0.16;
+    }
+  }
+  @media (max-width: 880px) {
+    .hero__network {
+      opacity: 0.07;
+    }
+  }
+
+  .hero__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .hero__avatar {
+    position: relative;
+    isolation: isolate;
+    flex-shrink: 0;
+    margin-top: -1.75rem;
+  }
+  .hero__avatar::before {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle, var(--accent) 0%, var(--accent-2) 55%, transparent 72%);
+    opacity: 0.24;
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
+  h1 {
     font-size: var(--text-display);
+    max-width: 22ch;
     margin-block: var(--space-md) var(--space-md);
   }
+  .grad {
+    color: var(--accent);
+  }
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .grad {
+      background: linear-gradient(100deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
   .sub {
-    max-width: 48ch;
+    max-width: 52ch;
     font-size: var(--text-lg);
     color: var(--text-muted);
   }
@@ -77,36 +168,36 @@ import { site } from '../site';
     margin-top: var(--space-lg);
   }
 
-  .facts {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
-    padding: var(--space-md);
-    margin-top: 0.6rem;
-  }
-  .facts dl {
+  .meta-strip {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-xl) var(--space-2xl);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
   }
-  .facts dt {
-    margin-bottom: 0.25rem;
+  .meta-strip > div {
+    flex: 1 1 13rem;
+    max-width: 22rem;
   }
-  .facts dd {
+  .meta-strip dt {
+    margin-bottom: 0.4rem;
+  }
+  .meta-strip dd {
     font-size: var(--text-sm);
     line-height: var(--leading-snug);
+    color: var(--text-muted);
   }
-  .facts dd span {
+  .meta-strip dd span {
     color: var(--accent);
   }
 
-  @media (max-width: 880px) {
-    .grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
+  @media (max-width: 640px) {
+    .hero__avatar {
+      margin-top: 0;
     }
-    .facts {
-      order: -1;
+    h1 {
+      max-width: none;
     }
   }
 </style>

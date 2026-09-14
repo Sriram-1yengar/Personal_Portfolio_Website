@@ -57,8 +57,11 @@ body::before {
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  background-image: radial-gradient(circle at center, var(--grid-dot) 1px, transparent 1.5px);
-  background-size: 44px 44px;
+  background-image:
+    radial-gradient(circle at center, var(--grid-dot) 1px, transparent 1.5px),
+    repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 176px),
+    repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px 176px);
+  background-size: 44px 44px, 176px 176px, 176px 176px;
   -webkit-mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, #000 0%, transparent 72%);
   mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, #000 0%, transparent 72%);
 }
@@ -77,6 +80,16 @@ body::after {
   background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
   opacity: var(--glow-opacity);
   filter: blur(24px);
+  animation: ambient-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-2.5vw, 3vh) scale(1.08);
+  }
 }
 
 img,
@@ -171,6 +184,10 @@ p {
 .section:first-of-type {
   border-top: 0;
 }
+.section--tint {
+  background: var(--bg-subtle);
+  border-top: 0;
+}
 
 .section-head {
   display: flex;
@@ -259,8 +276,15 @@ p {
 html.js [data-reveal] {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  transition: opacity 0.5s var(--ease) var(--reveal-delay, 0ms),
+    transform 0.5s var(--ease) var(--reveal-delay, 0ms);
   will-change: opacity, transform;
+}
+html.js [data-reveal='scale'] {
+  transform: scale(0.96);
+}
+html.js [data-reveal='right'] {
+  transform: translateX(18px);
 }
 html.js [data-reveal].is-visible {
   opacity: 1;

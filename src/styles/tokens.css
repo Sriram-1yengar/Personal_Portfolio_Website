@@ -20,11 +20,18 @@
   --accent-text: #ffffff;
   --accent-weak: #e7f0fd;
 
+  /* Secondary accent — warm orange. Sparing use: standout stat, alternating
+     card tint, one gradient word. Never used for links/CTAs/focus. */
+  --accent-2: #e8703f;
+  --accent-2-hover: #d15f30;
+  --accent-2-weak: #fbe9e0;
+
   --focus: var(--accent);
   --selection: #cfe2fb;
 
   /* Ambient background layer */
   --grid-dot: rgba(31, 58, 90, 0.07);
+  --grid-line: rgba(31, 58, 90, 0.09);
   --glow-opacity: 0.05;
 
   /* Type families */
@@ -40,7 +47,7 @@
   --text-xl: 1.375rem;
   --text-2xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.1rem);
   --text-3xl: clamp(2rem, 1.4rem + 2.6vw, 3rem);
-  --text-display: clamp(2.5rem, 1.2rem + 5.4vw, 4.75rem);
+  --text-display: clamp(2.75rem, 0.9rem + 7.4vw, 6.35rem);
 
   --leading-tight: 1.12;
   --leading-snug: 1.3;
@@ -86,9 +93,14 @@
   --accent-text: #ffffff;
   --accent-weak: #15263c;
 
+  --accent-2: #e8703f;
+  --accent-2-hover: #f08a5f;
+  --accent-2-weak: #2e1f16;
+
   --selection: #1e3a5c;
 
   --grid-dot: rgba(150, 180, 220, 0.06);
+  --grid-line: rgba(150, 180, 220, 0.1);
   --glow-opacity: 0.09;
 }
 
@@ -108,9 +120,14 @@
     --accent-text: #ffffff;
     --accent-weak: #15263c;
 
+    --accent-2: #e8703f;
+    --accent-2-hover: #f08a5f;
+    --accent-2-weak: #2e1f16;
+
     --selection: #1e3a5c;
 
     --grid-dot: rgba(150, 180, 220, 0.06);
+    --grid-line: rgba(150, 180, 220, 0.1);
     --glow-opacity: 0.09;
   }
 }

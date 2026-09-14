@@ -4,7 +4,7 @@ export const site = {
   location: 'Bangalore, India',
   url: 'https://sriramiyengar.me',
   description:
-    'Sriram Iyengar — data scientist building machine learning models and data pipelines for healthcare, e-commerce, and go-to-market teams.',
+    'Data Scientist and Machine Learning Engineer specializing in predictive modeling, healthcare analytics, large-scale data processing, and AI systems.',
   email: 'sriramkiyengar@gmail.com',
   resumeUrl:
     '/Sriram_Iyengar_Resume_Website.pdf',
@@ -14,8 +14,8 @@ export const site = {
     { label: 'Email', href: 'mailto:sriramkiyengar@gmail.com' },
   ],
   nav: [
-    { label: 'Projects', href: '/#projects' },
     { label: 'Experience', href: '/#experience' },
+    { label: 'Projects', href: '/#projects' },
     { label: 'About', href: '/#about' },
     { label: 'Contact', href: '/#contact' },
   ],
